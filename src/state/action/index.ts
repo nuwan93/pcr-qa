@@ -6,4 +6,9 @@ export interface LoadReport {
   payload: Report;
 }
 
-export type Action = LoadReport;
+export interface SelectRoom {
+  type: ActionType.SELECT_ROOM;
+  payload: number;
+}
+
+export type Action = LoadReport | SelectRoom;

@@ -19,6 +19,9 @@ const reportReducer = produce(
       case ActionType.LOAD_REPORT:
         state = action.payload;
         return state;
+      case ActionType.SELECT_ROOM:
+        state.selectedRoom = action.payload;
+        return state;
 
       default:
         return state;

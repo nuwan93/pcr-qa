@@ -10,7 +10,14 @@ const RoomList: React.FC = () => {
   return (
     <div className="ui relaxed divided list">
       {rooms.map((room, index) => {
-        return <RoomComponent title={room.title} altTitle={room.altTitle} />;
+        return (
+          <RoomComponent
+            key={index}
+            index={index}
+            title={room.title}
+            altTitle={room.altTitle}
+          />
+        );
       })}
     </div>
   );

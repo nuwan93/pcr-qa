@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useActions } from "../hooks/useActions";
 import RoomList from "./RoomList";
+import ItemList from "./ItemList";
 
 const App: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -53,7 +54,7 @@ const App: React.FC = () => {
           Upload
         </button>
 
-        <div>dateee</div>
+        <div>date</div>
 
         <div className="ui clearing divider"></div>
       </div>
@@ -61,7 +62,9 @@ const App: React.FC = () => {
       <div className="four wide column">
         <RoomList />
       </div>
-      <div className="twelve wide column">item</div>
+      <div className="twelve wide column">
+        <ItemList />
+      </div>
     </div>
   );
 };

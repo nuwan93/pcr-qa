@@ -1,8 +1,15 @@
 import { Room } from "../state";
+import { useActions } from "../hooks/useActions";
 
-const RoomComponent: React.FC<Room> = ({ title, altTitle }) => {
+interface IRoom extends Room {
+  index: number;
+}
+
+const RoomComponent: React.FC<IRoom> = ({ title, altTitle, index }) => {
+  const { selectRoom } = useActions();
+
   return (
-    <div className="item">
+    <div className="item" onClick={() => selectRoom(index)}>
       <div className="content">
         <input className="header" value={title} placeholder="Title" />
         <input

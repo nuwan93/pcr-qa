@@ -2,7 +2,7 @@ export type conditionType = "YES" | "NO" | "NA";
 
 export interface Report {
   fileName: string | null;
-  selectedRoom: number | undefined;
+  selectedRoom: number;
   entry: Entry;
 }
 
