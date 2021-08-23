@@ -38,7 +38,7 @@ const reportReducer = produce(
         return state;
 
       case ActionType.UPDATE_ITEM:
-        const { item } = action.payload;
+        //const { item } = action.payload;
         if (!state.entry.rooms) {
           return state;
         }
