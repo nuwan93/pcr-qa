@@ -8,16 +8,9 @@ const RoomList: React.FC = () => {
     return <div> No rooms</div>;
   }
   return (
-    <div className="ui relaxed divided list">
+    <div className="ui vertical fluid tabular menu">
       {rooms.map((room, index) => {
-        return (
-          <RoomComponent
-            key={index}
-            index={index}
-            title={room.title}
-            altTitle={room.altTitle}
-          />
-        );
+        return <RoomComponent key={index} index={index} />;
       })}
     </div>
   );

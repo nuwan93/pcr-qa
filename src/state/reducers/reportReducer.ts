@@ -19,8 +19,33 @@ const reportReducer = produce(
       case ActionType.LOAD_REPORT:
         state = action.payload;
         return state;
+
       case ActionType.SELECT_ROOM:
         state.selectedRoom = action.payload;
+        return state;
+
+      case ActionType.UPDATE_ROOM:
+        const { index, room } = action.payload;
+        const { title, altTitle } = room;
+        if (!state.entry.rooms) {
+          return state;
+        }
+        state.entry.rooms[index].title = title;
+        if (action.payload.room.altTitle === undefined) {
+          return state;
+        }
+        state.entry.rooms[index].altTitle = altTitle;
+        return state;
+
+      case ActionType.UPDATE_ITEM:
+        const { item } = action.payload;
+        if (!state.entry.rooms) {
+          return state;
+        }
+        if (!state.entry.rooms[state.selectedRoom].items) {
+          return state;
+        }
+
         return state;
 
       default:

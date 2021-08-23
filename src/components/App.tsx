@@ -20,7 +20,6 @@ const App: React.FC = () => {
         return;
       } else if (typeof e.target.result === "string") {
         loadReport(JSON.parse(e.target.result), "sample");
-        console.log("e.target.result", JSON.parse(e.target.result));
       }
     };
   };

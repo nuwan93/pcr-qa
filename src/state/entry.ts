@@ -21,9 +21,9 @@ export interface Room {
 }
 
 export interface Item {
-  title?: string;
+  title: string;
   type: string;
-  comment?: string;
+  comment: string;
   condition: {
     isClean: conditionType;
     isUndamaged: conditionType;
