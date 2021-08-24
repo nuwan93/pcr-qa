@@ -1,4 +1,13 @@
-import { LoadReport, SelectRoom, UpdateItem, UpdateRoom } from "../action";
+import {
+  AddItem,
+  AddRoom,
+  DeleteItem,
+  DeleteRoom,
+  LoadReport,
+  SelectRoom,
+  UpdateItem,
+  UpdateRoom,
+} from "../action";
 import { ActionType } from "../action-types";
 import { conditionType, Entry, Room } from "../entry";
 
@@ -51,5 +60,44 @@ export const updateItem = (
         },
       },
     },
+  };
+};
+
+export const addItem = (): AddItem => {
+  return {
+    type: ActionType.ADD_ITEM,
+    payload: {
+      title: "",
+      comment: "",
+      type: "FIXTURE",
+      condition: {
+        isClean: "NA",
+        isUndamaged: "NA",
+        isWorking: "NA",
+      },
+    },
+  };
+};
+
+export const addRoom = (): AddRoom => {
+  return {
+    type: ActionType.ADD_ROOM,
+    payload: {
+      title: "",
+      items: [],
+    },
+  };
+};
+
+export const deleteRoom = (): DeleteRoom => {
+  return {
+    type: ActionType.DELETE_ROOM,
+  };
+};
+
+export const deleteItem = (index: number): DeleteItem => {
+  return {
+    type: ActionType.DELETE_ITEM,
+    payload: index,
   };
 };

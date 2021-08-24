@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import { useActions } from "../hooks/useActions";
 import { Item, conditionType } from "../state";
 
 interface ItemProps {
@@ -12,6 +14,20 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
   const [isClean, setIsClean] = useState(item.condition.isClean);
   const [isUndamaged, setIsUndamaged] = useState(item.condition.isUndamaged);
   const [isWorking, setIsWorking] = useState(item.condition.isWorking);
+
+  const { updateItem } = useActions();
+  useEffect(() => {
+    updateItem(
+      index,
+      title,
+      comment,
+      item.type,
+      isClean,
+      isUndamaged,
+      isWorking
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title, comment, isClean, isUndamaged, isWorking, index, item.type]);
 
   const changeCondition = (
     e: React.MouseEvent<HTMLButtonElement>
@@ -41,10 +57,18 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
     <div className="item">
       <div className="content">
         <div className="header">
-          <input value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ margin: "5px" }}
+          />
         </div>
+        <button className="ui compact icon negative button ">
+          <i className="ui negative close icon"></i>
+        </button>
         <div className="right floated">
           <button
+            className="ui button"
             style={getButtonStyle(isClean)}
             onClick={(e) => setIsClean(changeCondition(e))}
             value={isClean}
@@ -52,6 +76,7 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
             Clean - {isClean}
           </button>
           <button
+            className="ui button"
             style={getButtonStyle(isUndamaged)}
             onClick={(e) => setIsUndamaged(changeCondition(e))}
             value={isUndamaged}
@@ -59,6 +84,7 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
             Undamaged - {isUndamaged}
           </button>
           <button
+            className="ui button"
             style={getButtonStyle(isWorking)}
             onClick={(e) => setIsWorking(changeCondition(e))}
             value={isWorking}

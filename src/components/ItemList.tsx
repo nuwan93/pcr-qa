@@ -1,7 +1,13 @@
+import { useActions } from "../hooks/useActions";
 import { usedTypedSelector } from "../hooks/useTypedSelector";
 import ItemComponent from "./Item";
 
 const ItemList: React.FC = () => {
+  const { addItem, deleteRoom } = useActions();
+  const selectedRoomIndex = usedTypedSelector(
+    ({ report }) => report.selectedRoom
+  );
+  const filename = usedTypedSelector(({ report }) => report.fileName);
   const selectRoom = usedTypedSelector((state) => {
     if (
       !state.report.entry.rooms ||
@@ -9,14 +15,49 @@ const ItemList: React.FC = () => {
     ) {
       return;
     }
-    return state.report.entry.rooms[state.report.selectedRoom];
+    return state.report.entry.rooms[selectedRoomIndex];
   });
+
+  const renderAddItemButton = () => {
+    if (!selectRoom) {
+      return null;
+    }
+    return (
+      <button className="ui positive right floated button" onClick={addItem}>
+        <i className="save icon"></i>New Item
+      </button>
+    );
+  };
+
+  const renderDeleteRoom = () => {
+    if (!filename) {
+      return null;
+    }
+    return (
+      <button
+        className="ui right floated negative button "
+        style={{ marginBottom: "10px" }}
+        onClick={() =>
+          window.confirm("Are you sure?") ? deleteRoom() : console.log()
+        }
+      >
+        Delete Room
+      </button>
+    );
+  };
+
   return (
-    <div className="ui divided items">
-      {selectRoom?.items?.map((item, index) => {
-        return <ItemComponent item={item} index={index} key={index} />;
-      })}
-    </div>
+    <>
+      {renderDeleteRoom()}
+      <div className="ui divided items">
+        {selectRoom?.items?.map((item, itemindex) => {
+          const key = selectedRoomIndex.toString() + itemindex.toString();
+          return <ItemComponent item={item} index={itemindex} key={key} />;
+        })}
+      </div>
+
+      {renderAddItemButton()}
+    </>
   );
 };
 

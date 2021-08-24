@@ -24,4 +24,31 @@ export interface UpdateItem {
   };
 }
 
-export type Action = LoadReport | SelectRoom | UpdateRoom | UpdateItem;
+export interface AddItem {
+  type: ActionType.ADD_ITEM;
+  payload: Item;
+}
+
+export interface AddRoom {
+  type: ActionType.ADD_ROOM;
+  payload: Room;
+}
+
+export interface DeleteItem {
+  type: ActionType.DELETE_ITEM;
+  payload: number;
+}
+
+export interface DeleteRoom {
+  type: ActionType.DELETE_ROOM;
+}
+
+export type Action =
+  | LoadReport
+  | SelectRoom
+  | UpdateRoom
+  | UpdateItem
+  | AddItem
+  | AddRoom
+  | DeleteItem
+  | DeleteRoom;

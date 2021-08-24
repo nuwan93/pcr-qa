@@ -1,18 +1,26 @@
+import { useActions } from "../hooks/useActions";
 import { usedTypedSelector } from "../hooks/useTypedSelector";
+
 import RoomComponent from "./Room";
 
 const RoomList: React.FC = () => {
+  const { addRoom } = useActions();
   const rooms = usedTypedSelector((state) => state.report.entry.rooms);
 
   if (!rooms) {
     return <div> No rooms</div>;
   }
   return (
-    <div className="ui vertical fluid tabular menu">
-      {rooms.map((room, index) => {
-        return <RoomComponent key={index} index={index} />;
-      })}
-    </div>
+    <>
+      <div className="ui vertical fluid tabular menu">
+        {rooms.map((room, index) => {
+          return <RoomComponent key={index + room.title} index={index} />;
+        })}
+      </div>
+      <button className="ui positive right floated button" onClick={addRoom}>
+        <i className="save icon"></i>New Room
+      </button>
+    </>
   );
 };
 
