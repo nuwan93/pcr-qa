@@ -44,7 +44,9 @@ const RoomComponent: React.FC<IRoom> = ({ index }) => {
           className="header"
           value={localRoom?.title}
           placeholder="Title"
-          onChange={(e) => setLocalRoom({ title: e.target.value })}
+          onChange={(e) =>
+            setLocalRoom({ ...localRoom, title: e.target.value })
+          }
         />
         <input
           className="description"

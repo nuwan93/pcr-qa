@@ -10,12 +10,13 @@ const RoomList: React.FC = () => {
   if (!rooms) {
     return <div> No rooms</div>;
   }
+
   return (
     <>
       <div className="ui vertical fluid tabular menu">
-        {rooms.map((room, index) => {
-          return <RoomComponent key={index + room.title} index={index} />;
-        })}
+        {rooms.map((room, index) => (
+          <RoomComponent key={room.id} index={index} />
+        ))}
       </div>
       <button className="ui positive right floated button" onClick={addRoom}>
         <i className="save icon"></i>New Room

@@ -72,6 +72,12 @@ const reportReducer = produce(
           return state;
         }
         state.entry.rooms.splice(state.selectedRoom, 1);
+        if (state.selectedRoom === 0) {
+          state.selectedRoom = 0;
+        } else {
+          state.selectedRoom--;
+        }
+
         return state;
 
       case ActionType.DELETE_ITEM:

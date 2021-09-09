@@ -1,3 +1,4 @@
+import { v4 as uuid_v4 } from "uuid";
 import {
   AddItem,
   AddRoom,
@@ -12,6 +13,13 @@ import { ActionType } from "../action-types";
 import { conditionType, Entry, Room } from "../entry";
 
 export const loadReport = (report: Entry, fileName: string): LoadReport => {
+  report.rooms?.forEach((room) => {
+    room.id = uuid_v4();
+    room.items?.forEach((item) => {
+      item.id = uuid_v4();
+    });
+  });
+
   return {
     type: ActionType.LOAD_REPORT,
     payload: {
@@ -38,6 +46,7 @@ export const updateRoom = (room: Room, index: number): UpdateRoom => {
 
 export const updateItem = (
   index: number,
+  id: string,
   title: string,
   comment: string,
   type: string,
@@ -50,6 +59,7 @@ export const updateItem = (
     payload: {
       index,
       item: {
+        id,
         title,
         comment,
         type,
@@ -67,6 +77,7 @@ export const addItem = (): AddItem => {
   return {
     type: ActionType.ADD_ITEM,
     payload: {
+      id: uuid_v4(),
       title: "",
       comment: "",
       type: "FIXTURE",
@@ -83,6 +94,7 @@ export const addRoom = (): AddRoom => {
   return {
     type: ActionType.ADD_ROOM,
     payload: {
+      id: uuid_v4(),
       title: "",
       items: [],
     },

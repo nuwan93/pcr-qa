@@ -1,6 +1,6 @@
 import { useActions } from "../hooks/useActions";
 import { usedTypedSelector } from "../hooks/useTypedSelector";
-import ItemComponent from "./Item";
+import ItemComponent from "./ItemComponent";
 
 const ItemList: React.FC = () => {
   const { addItem, deleteRoom } = useActions();
@@ -50,10 +50,9 @@ const ItemList: React.FC = () => {
     <>
       {renderDeleteRoom()}
       <div className="ui divided items">
-        {selectRoom?.items?.map((item, itemindex) => {
-          const key = selectedRoomIndex.toString() + itemindex.toString();
-          return <ItemComponent item={item} index={itemindex} key={key} />;
-        })}
+        {selectRoom?.items?.map((item, itemindex) => (
+          <ItemComponent key={item.id} item={item} index={itemindex} />
+        ))}
       </div>
 
       {renderAddItemButton()}

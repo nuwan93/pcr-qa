@@ -7,7 +7,9 @@ import { usedTypedSelector } from "../hooks/useTypedSelector";
 const App: React.FC = () => {
   const originaName = usedTypedSelector(({ report }) => report.fileName);
   const entry = usedTypedSelector(({ report }) => report.entry);
-  console.log(entry);
+
+  //const report = usedTypedSelector(({ report }) => report);
+  //console.log(report);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const { loadReport } = useActions();

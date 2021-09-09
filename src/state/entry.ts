@@ -14,6 +14,7 @@ export interface Entry {
 }
 
 export interface Room {
+  id?: string;
   title: string;
   altTitle?: string;
   comment?: string;
@@ -21,6 +22,7 @@ export interface Room {
 }
 
 export interface Item {
+  id: string;
   title: string;
   type: string;
   comment: string;

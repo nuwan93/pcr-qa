@@ -15,10 +15,11 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
   const [isUndamaged, setIsUndamaged] = useState(item.condition.isUndamaged);
   const [isWorking, setIsWorking] = useState(item.condition.isWorking);
 
-  const { updateItem } = useActions();
+  const { updateItem, deleteItem } = useActions();
   useEffect(() => {
     updateItem(
       index,
+      item.id,
       title,
       comment,
       item.type,
@@ -63,7 +64,12 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
             style={{ margin: "5px" }}
           />
         </div>
-        <button className="ui compact icon negative button ">
+        <button
+          className="ui compact icon negative button "
+          onClick={() =>
+            window.confirm("Are you sure?") ? deleteItem(index) : console.log()
+          }
+        >
           <i className="ui negative close icon"></i>
         </button>
         <div className="right floated">
@@ -73,7 +79,7 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
             onClick={(e) => setIsClean(changeCondition(e))}
             value={isClean}
           >
-            Clean - {isClean}
+            C - {isClean}
           </button>
           <button
             className="ui button"
@@ -81,7 +87,7 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
             onClick={(e) => setIsUndamaged(changeCondition(e))}
             value={isUndamaged}
           >
-            Undamaged - {isUndamaged}
+            U - {isUndamaged}
           </button>
           <button
             className="ui button"
@@ -89,7 +95,7 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
             onClick={(e) => setIsWorking(changeCondition(e))}
             value={isWorking}
           >
-            Working - {isWorking}
+            W - {isWorking}
           </button>
         </div>
         <div className="description">
