@@ -14,7 +14,7 @@ export interface Entry {
 }
 
 export interface Room {
-  id?: string;
+  id: string;
   title: string;
   altTitle?: string;
   comment?: string;

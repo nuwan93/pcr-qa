@@ -8,11 +8,11 @@ import {
   Draggable,
   DropResult,
 } from "react-beautiful-dnd";
-import { useEffect, useState } from "react";
+
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   padding: 10,
-  margin: `0 50px 15px 50px`,
+  margin: `0 0px 15px 0px`,
   background: isDragging ? "#4a2975" : "white",
   color: isDragging ? "white" : "black",
   border: `1px solid black`,
@@ -33,17 +33,12 @@ const ItemList: React.FC = () => {
     return state.report.entry.rooms[selectedRoomIndex];
   });
 
-  const [items, setItems] = useState(selectRoom?.items);
-
-  useEffect(() => {
-    if (!items) return;
-    updateItemListOrder(items);
-  }, [items, updateItemListOrder]);
+  
 
   const renderAddItemButton = () => {
     if (!selectRoom) return null;
     return (
-      <button className="ui positive right floated button" onClick={addItem}>
+      <button className="ui positive right floated button" style={{marginTop:"15px"}} onClick={addItem}>
         <i className="save icon"></i>New Item
       </button>
     );
@@ -66,15 +61,13 @@ const ItemList: React.FC = () => {
   };
 
   const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
-    console.log(items);
+    const { source, destination } = result;  
     if (!destination) return;
-    if (!items) return;
-    const itemList = Array.from(items);
+    if (!selectRoom?.items) return;
+    const itemList = Array.from(selectRoom?.items);
     const [newOrder] = itemList.splice(source.index, 1);
     itemList.splice(destination.index, 0, newOrder);
-
-    setItems(items);
+    updateItemListOrder(itemList)
   };
 
   return (
@@ -114,11 +107,7 @@ const ItemList: React.FC = () => {
         </Droppable>
       </DragDropContext>
 
-      {/* <div className="ui divided items">
-        {selectRoom?.items?.map((item, itemindex) => (
-          <ItemComponent key={item.id} item={item} index={itemindex} />
-        ))}
-      </div> */}
+     
 
       {renderAddItemButton()}
     </>

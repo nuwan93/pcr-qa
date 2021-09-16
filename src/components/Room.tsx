@@ -31,7 +31,13 @@ const RoomComponent: React.FC<IRoom> = ({ index }) => {
     if (!localRoom) {
       return;
     }
-    setLocalRoom({ title: localRoom.title, altTitle: e.target.value });
+    setLocalRoom({ ...localRoom, altTitle: e.target.value });
+  };
+  const onChangeTile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!localRoom) {
+      return;
+    }
+    setLocalRoom({ ...localRoom, title: e.target.value });
   };
   return (
     <div
@@ -39,22 +45,24 @@ const RoomComponent: React.FC<IRoom> = ({ index }) => {
       onClick={() => selectRoom(index)}
       style={activeRoom === index ? activeStyle : {}}
     >
+      <i className="sort middle aligned icon"></i>
       <div className="content">
         <input
           className="header"
           value={localRoom?.title}
           placeholder="Title"
-          onChange={(e) =>
-            setLocalRoom({ ...localRoom, title: e.target.value })
-          }
+          onChange={(e)  => onChangeTile(e)}
+          style={{marginBottom:"10px"}}
         />
         <input
-          className="description"
+          className="header"
           value={localRoom?.altTitle}
           placeholder="Alt title"
           onChange={(e) => onChangeAltTile(e)}
         />
+        
       </div>
+      
     </div>
   );
 };
