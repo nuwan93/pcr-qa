@@ -8,7 +8,7 @@ import {
   Draggable,
   DropResult,
 } from "react-beautiful-dnd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   padding: 10,
@@ -22,25 +22,26 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
 });
 
 const ItemList: React.FC = () => {
-  const { addItem, deleteRoom } = useActions();
+  const { addItem, deleteRoom, updateItemListOrder } = useActions();
+
   const selectedRoomIndex = usedTypedSelector(
     ({ report }) => report.selectedRoom
   );
   const filename = usedTypedSelector(({ report }) => report.fileName);
   const selectRoom = usedTypedSelector((state) => {
-    if (
-      !state.report.entry.rooms ||
-      (!state.report.selectedRoom && state.report.selectedRoom !== 0)
-    ) {
-      return;
-    }
+    if (!state.report.entry.rooms) return;
     return state.report.entry.rooms[selectedRoomIndex];
   });
+
   const [items, setItems] = useState(selectRoom?.items);
+
+  useEffect(() => {
+    if (!items) return;
+    updateItemListOrder(items);
+  }, [items, updateItemListOrder]);
+
   const renderAddItemButton = () => {
-    if (!selectRoom) {
-      return null;
-    }
+    if (!selectRoom) return null;
     return (
       <button className="ui positive right floated button" onClick={addItem}>
         <i className="save icon"></i>New Item
@@ -66,6 +67,7 @@ const ItemList: React.FC = () => {
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
+    console.log(items);
     if (!destination) return;
     if (!items) return;
     const itemList = Array.from(items);

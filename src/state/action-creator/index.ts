@@ -1,4 +1,5 @@
 import { v4 as uuid_v4 } from "uuid";
+
 import {
   AddItem,
   AddRoom,
@@ -7,10 +8,11 @@ import {
   LoadReport,
   SelectRoom,
   UpdateItem,
+  UpdateItemListOrder,
   UpdateRoom,
 } from "../action";
 import { ActionType } from "../action-types";
-import { conditionType, Entry, Room } from "../entry";
+import { conditionType, Entry, Room, Item } from "../entry";
 
 export const loadReport = (report: Entry, fileName: string): LoadReport => {
   report.rooms?.forEach((room) => {
@@ -111,5 +113,12 @@ export const deleteItem = (index: number): DeleteItem => {
   return {
     type: ActionType.DELETE_ITEM,
     payload: index,
+  };
+};
+
+export const updateItemListOrder = (items: Item[]): UpdateItemListOrder => {
+  return {
+    type: ActionType.UPDATE_ITEM_LIST_ORDER,
+    payload: items,
   };
 };

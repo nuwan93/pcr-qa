@@ -7,4 +7,5 @@ export enum ActionType {
   ADD_ROOM = "add_room",
   DELETE_ITEM = "delete_item",
   DELETE_ROOM = "delete_room",
+  UPDATE_ITEM_LIST_ORDER = "update_item_list_order",
 }

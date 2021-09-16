@@ -16,6 +16,7 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
   const [isWorking, setIsWorking] = useState(item.condition.isWorking);
 
   const { updateItem, deleteItem } = useActions();
+
   useEffect(() => {
     updateItem(
       index,

@@ -43,6 +43,11 @@ export interface DeleteRoom {
   type: ActionType.DELETE_ROOM;
 }
 
+export interface UpdateItemListOrder {
+  type: ActionType.UPDATE_ITEM_LIST_ORDER;
+  payload: Item[];
+}
+
 export type Action =
   | LoadReport
   | SelectRoom
@@ -51,4 +56,5 @@ export type Action =
   | AddItem
   | AddRoom
   | DeleteItem
-  | DeleteRoom;
+  | DeleteRoom
+  | UpdateItemListOrder;
