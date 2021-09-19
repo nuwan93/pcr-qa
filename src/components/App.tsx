@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useActions } from "../hooks/useActions";
 import DatePicker from "react-datepicker";
 import RoomList from "./RoomList";
@@ -16,7 +16,14 @@ const App: React.FC = () => {
   //console.log(report);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const { loadReport, updateDate } = useActions();
+  const { loadReport, loadReportFromLocalStorage, updateDate } = useActions();
+
+  useEffect(() => {
+    const unserilizelReport = localStorage.getItem("reportData");
+    if (!unserilizelReport) return;
+    loadReportFromLocalStorage(JSON.parse(unserilizelReport));
+    // eslint-disable-next-line
+  }, []);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
@@ -55,7 +62,18 @@ const App: React.FC = () => {
       alert("No File to download!");
       return;
     }
-    const json = JSON.stringify(entry, null, 4);
+
+    const jsonFormat = JSON.stringify(entry, null, 4);
+    const unTypedObj = JSON.parse(jsonFormat);
+
+    unTypedObj.rooms?.forEach((room: any) => {
+      delete room.id;
+      room.items?.forEach((item: any) => {
+        delete item.id;
+      });
+    });
+
+    const json = JSON.stringify(unTypedObj, null, 4);
     const blob = new Blob([json], { type: "application/json" });
     const href = await URL.createObjectURL(blob);
     const link = document.createElement("a");

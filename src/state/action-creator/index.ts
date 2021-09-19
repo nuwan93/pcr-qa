@@ -14,7 +14,7 @@ import {
   UpdateRoomListOrder,
 } from "../action";
 import { ActionType } from "../action-types";
-import { conditionType, Entry, Room, Item } from "../entry";
+import { conditionType, Entry, Room, Item, Report } from "../entry";
 
 export const loadReport = (report: Entry, fileName: string): LoadReport => {
   report.rooms?.forEach((room) => {
@@ -31,6 +31,13 @@ export const loadReport = (report: Entry, fileName: string): LoadReport => {
       selectedRoom: 0,
       entry: report,
     },
+  };
+};
+
+export const loadReportFromLocalStorage = (report: Report): LoadReport => {
+  return {
+    type: ActionType.LOAD_REPORT,
+    payload: report,
   };
 };
 
