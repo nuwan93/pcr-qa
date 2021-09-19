@@ -9,7 +9,6 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 
-
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   padding: 10,
   margin: `0 0px 15px 0px`,
@@ -33,12 +32,14 @@ const ItemList: React.FC = () => {
     return state.report.entry.rooms[selectedRoomIndex];
   });
 
-  
-
   const renderAddItemButton = () => {
     if (!selectRoom) return null;
     return (
-      <button className="ui positive right floated button" style={{marginTop:"15px"}} onClick={addItem}>
+      <button
+        className="ui positive right floated button"
+        style={{ marginTop: "15px" }}
+        onClick={addItem}
+      >
         <i className="save icon"></i>New Item
       </button>
     );
@@ -61,18 +62,21 @@ const ItemList: React.FC = () => {
   };
 
   const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;  
+    const { source, destination } = result;
     if (!destination) return;
     if (!selectRoom?.items) return;
     const itemList = Array.from(selectRoom?.items);
     const [newOrder] = itemList.splice(source.index, 1);
     itemList.splice(destination.index, 0, newOrder);
-    updateItemListOrder(itemList)
+    updateItemListOrder(itemList);
   };
 
   return (
     <>
       <div style={{ marginBottom: "50px" }}>{renderDeleteRoom()}</div>
+      <div className="ui left floated" style={{ marginBottom: "5px" }}>
+        <h2>{selectRoom?.title}</h2>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={uuid_v4()}>
           {(provided) => (
@@ -106,8 +110,6 @@ const ItemList: React.FC = () => {
           )}
         </Droppable>
       </DragDropContext>
-
-     
 
       {renderAddItemButton()}
     </>

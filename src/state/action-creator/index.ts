@@ -7,9 +7,11 @@ import {
   DeleteRoom,
   LoadReport,
   SelectRoom,
+  UpdateDate,
   UpdateItem,
   UpdateItemListOrder,
   UpdateRoom,
+  UpdateRoomListOrder,
 } from "../action";
 import { ActionType } from "../action-types";
 import { conditionType, Entry, Room, Item } from "../entry";
@@ -120,5 +122,19 @@ export const updateItemListOrder = (items: Item[]): UpdateItemListOrder => {
   return {
     type: ActionType.UPDATE_ITEM_LIST_ORDER,
     payload: items,
+  };
+};
+
+export const updateRoomListOrder = (rooms: Room[]): UpdateRoomListOrder => {
+  return {
+    type: ActionType.UPDATE_ROOM_LIST_ORDER,
+    payload: rooms,
+  };
+};
+
+export const updateDate = (date: number): UpdateDate => {
+  return {
+    type: ActionType.UPDATE_DATE,
+    payload: date,
   };
 };

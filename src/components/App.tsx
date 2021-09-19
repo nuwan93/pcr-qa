@@ -1,8 +1,12 @@
 import React, { useRef } from "react";
 import { useActions } from "../hooks/useActions";
+import DatePicker from "react-datepicker";
 import RoomList from "./RoomList";
 import ItemList from "./ItemList";
 import { usedTypedSelector } from "../hooks/useTypedSelector";
+
+import "react-datepicker/dist/react-datepicker.css";
+import "./App.css";
 
 const App: React.FC = () => {
   const originaName = usedTypedSelector(({ report }) => report.fileName);
@@ -12,7 +16,7 @@ const App: React.FC = () => {
   //console.log(report);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const { loadReport } = useActions();
+  const { loadReport, updateDate } = useActions();
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
@@ -62,6 +66,24 @@ const App: React.FC = () => {
     document.body.removeChild(link);
   };
 
+  const renderDatePicker = () => {
+    if (entry.inspectedAt) {
+      return (
+        <DatePicker
+          selected={new Date(entry.inspectedAt * 1000)}
+          onChange={(date) => {
+            if (date) {
+              updateDate(Date.parse(String(date)) / 1000);
+            }
+          }}
+          showYearDropdown
+          scrollableYearDropdown
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="ui container grid" style={{ marginTop: "10px" }}>
       <div className="sixteen wide column">
@@ -94,7 +116,10 @@ const App: React.FC = () => {
           Upload
         </button>
 
-        <div>date</div>
+        <div>
+          <h3> {originaName}</h3>
+          {renderDatePicker()}
+        </div>
 
         <div className="ui clearing divider"></div>
       </div>

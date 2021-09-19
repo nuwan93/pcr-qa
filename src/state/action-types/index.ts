@@ -8,4 +8,6 @@ export enum ActionType {
   DELETE_ITEM = "delete_item",
   DELETE_ROOM = "delete_room",
   UPDATE_ITEM_LIST_ORDER = "update_item_list_order",
+  UPDATE_ROOM_LIST_ORDER = "update_room_list_order",
+  UPDATE_DATE = "update_date",
 }

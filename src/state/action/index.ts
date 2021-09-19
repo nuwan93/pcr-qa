@@ -48,6 +48,16 @@ export interface UpdateItemListOrder {
   payload: Item[];
 }
 
+export interface UpdateRoomListOrder {
+  type: ActionType.UPDATE_ROOM_LIST_ORDER;
+  payload: Room[];
+}
+
+export interface UpdateDate {
+  type: ActionType.UPDATE_DATE;
+  payload: number;
+}
+
 export type Action =
   | LoadReport
   | SelectRoom
@@ -57,4 +67,6 @@ export type Action =
   | AddRoom
   | DeleteItem
   | DeleteRoom
-  | UpdateItemListOrder;
+  | UpdateItemListOrder
+  | UpdateRoomListOrder
+  | UpdateDate;

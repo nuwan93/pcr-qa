@@ -77,6 +77,16 @@ const reportReducer = produce(
         if (!state.entry.rooms) return state;
         state.entry.rooms[state.selectedRoom].items = action.payload;
         return state;
+
+      case ActionType.UPDATE_ROOM_LIST_ORDER:
+        if (!state.entry.rooms) return state;
+        state.entry.rooms = action.payload;
+        return state;
+
+      case ActionType.UPDATE_DATE:
+        if (!state.entry) return state;
+        state.entry.inspectedAt = action.payload;
+        return state;
     }
   }
 );
