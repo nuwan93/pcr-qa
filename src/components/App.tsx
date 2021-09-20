@@ -137,6 +137,7 @@ const App: React.FC = () => {
         <div>
           <h3> {originaName}</h3>
           {renderDatePicker()}
+          {entry.rooms?.length} Rooms
         </div>
 
         <div className="ui clearing divider"></div>

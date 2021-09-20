@@ -76,6 +76,7 @@ const ItemList: React.FC = () => {
       <div style={{ marginBottom: "50px" }}>{renderDeleteRoom()}</div>
       <div className="ui left floated" style={{ marginBottom: "5px" }}>
         <h2>{selectRoom?.title}</h2>
+        {selectRoom?.items?.length} Items
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={uuid_v4()}>
