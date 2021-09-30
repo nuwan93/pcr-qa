@@ -7,6 +7,7 @@ import { usedTypedSelector } from "../hooks/useTypedSelector";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
+import { Entry } from "../state";
 
 const App: React.FC = () => {
   const originaName = usedTypedSelector(({ report }) => report.fileName);
@@ -103,12 +104,13 @@ const App: React.FC = () => {
   };
 
   const clearAll = () => {
-    const emptyReport = {
+    const emptyReport: Entry = {
       importMode: "CREATE_ONLY",
       inspectedAt: Date.now() / 1000,
       type: "ENTRY",
       rooms: [
         {
+          id: '1',
           title: "",
         },
       ],
