@@ -102,9 +102,32 @@ const App: React.FC = () => {
     return null;
   };
 
+  const clearAll = () => {
+    const emptyReport = {
+      importMode: "CREATE_ONLY",
+      inspectedAt: Date.now() / 1000,
+      type: "ENTRY",
+      rooms: [
+        {
+          title: "",
+        },
+      ],
+    };
+    loadReport(emptyReport, "Untitled.json");
+  };
+
   return (
     <div className="ui container grid" style={{ marginTop: "10px" }}>
       <div className="sixteen wide column">
+        <button
+          className="ui negative right floated button"
+          onClick={() =>
+            window.confirm("Are you sure?") ? clearAll() : console.log()
+          }
+        >
+          <i className="window close"></i>
+          Clear All
+        </button>
         <button
           className="ui negative basic right floated button"
           onClick={() => downloadFile()}
