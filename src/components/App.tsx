@@ -110,8 +110,21 @@ const App: React.FC = () => {
       type: "ENTRY",
       rooms: [
         {
-          id: '1',
+          id: "1",
           title: "",
+          items: [
+            {
+              id: "1",
+              title: "",
+              comment: "",
+              type: "FIXTURE",
+              condition: {
+                isClean: "NA",
+                isUndamaged: "NA",
+                isWorking: "NA",
+              },
+            },
+          ],
         },
       ],
     };
