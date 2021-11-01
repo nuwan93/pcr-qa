@@ -36,23 +36,28 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
   ): conditionType => {
     const target = e.target as HTMLButtonElement;
 
-    if (target.value === "YES") {
+    if (target.value === "") {
+      return "NA";
+    } else if (target.value === "NA") {
+      return "YES";
+    } else if (target.value === "YES") {
       return "NO";
     } else if (target.value === "NO") {
-      return "NA";
-    } else {
-      return "YES";
+      return undefined;
     }
   };
-  const getButtonStyle = (
-    condition: conditionType
-  ): { backgroundColor: string } => {
+  const getButtonStyle = (condition: conditionType) => {
     if (condition === "YES") {
-      return { backgroundColor: "palegreen" };
+      return { backgroundColor: "palegreen", border: "2px solid black" };
     } else if (condition === "NO") {
-      return { backgroundColor: "salmon" };
+      return { backgroundColor: "salmon", border: "2px solid black" };
+    } else if (condition === undefined) {
+      return {
+        backgroundColor: "white",
+        border: "2px solid black",
+      };
     } else {
-      return { backgroundColor: "yellow" };
+      return { backgroundColor: "yellow", border: "2px solid black" };
     }
   };
   return (

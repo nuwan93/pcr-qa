@@ -119,9 +119,9 @@ const App: React.FC = () => {
               comment: "",
               type: "FIXTURE",
               condition: {
-                isClean: "NA",
-                isUndamaged: "NA",
-                isWorking: "NA",
+                isClean: undefined,
+                isUndamaged: undefined,
+                isWorking: undefined,
               },
             },
           ],

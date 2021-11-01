@@ -1,4 +1,4 @@
-export type conditionType = "YES" | "NO" | "NA";
+export type conditionType = "YES" | "NO" | "NA" | undefined;
 
 export interface Report {
   fileName: string | null;
@@ -27,8 +27,8 @@ export interface Item {
   type: string;
   comment: string;
   condition: {
-    isClean: conditionType;
-    isUndamaged: conditionType;
-    isWorking: conditionType;
+    isClean?: conditionType;
+    isUndamaged?: conditionType;
+    isWorking?: conditionType;
   };
 }

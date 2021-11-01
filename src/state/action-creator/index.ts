@@ -93,9 +93,9 @@ export const addItem = (): AddItem => {
       comment: "",
       type: "FIXTURE",
       condition: {
-        isClean: "NA",
-        isUndamaged: "NA",
-        isWorking: "NA",
+        isClean: undefined,
+        isUndamaged: undefined,
+        isWorking: undefined,
       },
     },
   };
