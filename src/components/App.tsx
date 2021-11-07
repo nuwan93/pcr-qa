@@ -89,10 +89,10 @@ const App: React.FC = () => {
     if (entry.inspectedAt) {
       return (
         <DatePicker
-          selected={new Date(entry.inspectedAt * 1000)}
+          selected={new Date(entry.inspectedAt)}
           onChange={(date) => {
             if (date) {
-              updateDate(Date.parse(String(date)) / 1000);
+              updateDate(Date.parse(String(date)));
             }
           }}
           showYearDropdown
@@ -106,7 +106,7 @@ const App: React.FC = () => {
   const clearAll = () => {
     const emptyReport: Entry = {
       importMode: "CREATE_ONLY",
-      inspectedAt: Date.now() / 1000,
+      inspectedAt: Date.now(),
       type: "ENTRY",
       rooms: [
         {
