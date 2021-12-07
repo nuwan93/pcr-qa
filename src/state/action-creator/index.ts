@@ -1,4 +1,5 @@
 import { v4 as uuid_v4 } from "uuid";
+import { itemType } from "..";
 
 import {
   AddItem,
@@ -60,7 +61,7 @@ export const updateItem = (
   id: string,
   title: string,
   comment: string,
-  type: string,
+  type: itemType,
   isClean: conditionType,
   isUndamaged: conditionType,
   isWorking: conditionType

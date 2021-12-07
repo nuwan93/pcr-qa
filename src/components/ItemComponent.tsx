@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useActions } from "../hooks/useActions";
-import { Item, conditionType } from "../state";
+import { Item, conditionType, itemType } from "../state";
 
 interface ItemProps {
   index: number;
@@ -10,6 +10,7 @@ interface ItemProps {
 
 const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
   const [title, setTitle] = useState(item.title);
+  const [type, setType] = useState(item.type);
   const [comment, setComment] = useState(item.comment);
   const [isClean, setIsClean] = useState(item.condition.isClean);
   const [isUndamaged, setIsUndamaged] = useState(item.condition.isUndamaged);
@@ -23,13 +24,21 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
       item.id,
       title,
       comment,
-      item.type,
+      type,
       isClean,
       isUndamaged,
       isWorking
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title, comment, isClean, isUndamaged, isWorking, index, item.type]);
+  }, [title, comment, isClean, isUndamaged, isWorking, index, type]);
+
+  const changeItemType = (e: React.MouseEvent<HTMLButtonElement>): itemType => {
+    const target = e.target as HTMLButtonElement;
+    if (target.value === "FIXTURE") {
+      return "FURNITURE";
+    }
+    return "FIXTURE";
+  };
 
   const changeCondition = (
     e: React.MouseEvent<HTMLButtonElement>
@@ -77,6 +86,13 @@ const ItemComponent: React.FC<ItemProps> = ({ index, item }) => {
           }
         >
           <i className="ui negative close icon"></i>
+        </button>
+        <button
+          className="ui button"
+          value={type}
+          onClick={(e) => setType(changeItemType(e))}
+        >
+          {type}
         </button>
         <div className="right floated">
           <button

@@ -1,4 +1,5 @@
 export type conditionType = "YES" | "NO" | "NA" | undefined;
+export type itemType = "FIXTURE" | "FURNITURE";
 
 export interface Report {
   fileName: string | null;
@@ -24,7 +25,7 @@ export interface Room {
 export interface Item {
   id: string;
   title: string;
-  type: string;
+  type: itemType;
   comment: string;
   condition: {
     isClean?: conditionType;

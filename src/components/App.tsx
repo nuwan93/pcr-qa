@@ -32,6 +32,7 @@ const App: React.FC = () => {
       alert("Have not uploaded a new file!");
       return;
     }
+
     const fileName = e.target.files[0].name;
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {

@@ -74,6 +74,7 @@ const ItemList: React.FC = () => {
   return (
     <>
       <div style={{ marginBottom: "50px" }}>{renderDeleteRoom()}</div>
+
       <div className="ui left floated" style={{ marginBottom: "5px" }}>
         <h2>{selectRoom?.title}</h2>
         {selectRoom?.items?.length} Items
