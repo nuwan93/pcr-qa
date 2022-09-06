@@ -9,9 +9,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 import { Entry } from "../state";
 
+
 const App: React.FC = () => {
   const originaName = usedTypedSelector(({ report }) => report.fileName);
   const entry = usedTypedSelector(({ report }) => report.entry);
+  
 
   //const report = usedTypedSelector(({ report }) => report);
   //console.log(report);
@@ -186,6 +188,7 @@ const App: React.FC = () => {
         <RoomList />
       </div>
       <div className="twelve wide column">
+        
         <ItemList />
       </div>
     </div>

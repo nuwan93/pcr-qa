@@ -33,6 +33,16 @@ const reportReducer = produce(
         state.entry.rooms[index].altTitle = altTitle;
         return state;
 
+      case ActionType.UPDATE_ROOM_DESCRIPTION:
+      
+      const { routineRoom } = action.payload;
+      if (!state.entry.rooms) return state;
+      
+      if (!state.entry.rooms[action.payload.index]) return state;
+      state.entry.rooms[action.payload.index] = routineRoom
+      
+      return state;
+
       case ActionType.UPDATE_ITEM:
         const { item } = action.payload;
         if (!state.entry.rooms) return state;

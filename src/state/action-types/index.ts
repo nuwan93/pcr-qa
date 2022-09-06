@@ -2,6 +2,7 @@ export enum ActionType {
   LOAD_REPORT = "load_report",
   SELECT_ROOM = "select_room",
   UPDATE_ROOM = "update_room",
+  UPDATE_ROOM_DESCRIPTION = "update_room_description",
   UPDATE_ITEM = "update_item",
   ADD_ITEM = "add_item",
   ADD_ROOM = "add_room",

@@ -16,7 +16,7 @@ const RoomComponent: React.FC<IRoom> = ({ index }) => {
     return state.report.entry.rooms[index];
   });
   const [localRoom, setLocalRoom] = useState(globalRoom);
-
+ 
   const activeRoom = usedTypedSelector((state) => state.report.selectedRoom);
   const activeStyle = { backgroundColor: "palegreen" };
 

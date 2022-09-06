@@ -12,6 +12,7 @@ import {
   UpdateItem,
   UpdateItemListOrder,
   UpdateRoom,
+  UpdateRoomDescription,
   UpdateRoomListOrder,
 } from "../action";
 import { ActionType } from "../action-types";
@@ -53,6 +54,33 @@ export const updateRoom = (room: Room, index: number): UpdateRoom => {
   return {
     type: ActionType.UPDATE_ROOM,
     payload: { room, index },
+  };
+};
+
+export const updateRoomDescription = (
+  index: number,
+  id: string,
+  title: string,
+  comment: string | undefined,
+  isClean: conditionType,
+  isUndamaged: conditionType,
+  isWorking: conditionType
+): UpdateRoomDescription => {
+  return {
+    type: ActionType.UPDATE_ROOM_DESCRIPTION,
+    payload: {
+      index,
+      routineRoom: {
+        id,
+        title,
+        comment,
+        condition: {
+          isClean,
+          isUndamaged,
+          isWorking,
+        },
+      },
+    },
   };
 };
 

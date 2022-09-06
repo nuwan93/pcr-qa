@@ -8,6 +8,7 @@ import {
   Draggable,
   DropResult,
 } from "react-beautiful-dnd";
+import RoomDescription from "./RoomDescription";
 
 const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   padding: 10,
@@ -26,6 +27,9 @@ const ItemList: React.FC = () => {
   const selectedRoomIndex = usedTypedSelector(
     ({ report }) => report.selectedRoom
   );
+  const inspectionType = usedTypedSelector(
+    ({ report }) => report.entry.type
+  );
   const filename = usedTypedSelector(({ report }) => report.fileName);
   const selectRoom = usedTypedSelector((state) => {
     if (!state.report.entry.rooms) return;
@@ -33,7 +37,7 @@ const ItemList: React.FC = () => {
   });
 
   const renderAddItemButton = () => {
-    if (!selectRoom) return null;
+    if (!selectRoom || inspectionType === 'ROUTINE') return null;
     return (
       <button
         className="ui positive right floated button"
@@ -71,11 +75,17 @@ const ItemList: React.FC = () => {
     updateItemListOrder(itemList);
   };
 
-  return (
-    <>
-      <div style={{ marginBottom: "50px" }}>{renderDeleteRoom()}</div>
+  const renderRoomDescription = () =>{
+    if (inspectionType === 'ROUTINE') {
+      if (!selectRoom) return
+        return <RoomDescription 
+        index={selectedRoomIndex}
+        room={selectRoom}
+      />
+    }
 
-      <div className="ui left floated" style={{ marginBottom: "5px" }}>
+    return <>
+    <div className="ui left floated" style={{ marginBottom: "5px" }}>
         <h2>{selectRoom?.title}</h2>
         {selectRoom?.items?.length} Items
       </div>
@@ -112,7 +122,14 @@ const ItemList: React.FC = () => {
           )}
         </Droppable>
       </DragDropContext>
+    </>
+    
+  }
 
+  return (
+    <>
+    <div style={{ marginBottom: "50px" }}>{renderDeleteRoom()}</div>
+      {renderRoomDescription()}
       {renderAddItemButton()}
     </>
   );

@@ -16,6 +16,11 @@ export interface UpdateRoom {
   payload: { room: Room; index: number };
 }
 
+export interface UpdateRoomDescription {
+  type: ActionType.UPDATE_ROOM_DESCRIPTION;
+  payload: { routineRoom: Room; index: number };
+}
+
 export interface UpdateItem {
   type: ActionType.UPDATE_ITEM;
   payload: {
@@ -69,4 +74,6 @@ export type Action =
   | DeleteRoom
   | UpdateItemListOrder
   | UpdateRoomListOrder
-  | UpdateDate;
+  | UpdateDate
+  | UpdateRoomDescription;
+

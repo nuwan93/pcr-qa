@@ -19,6 +19,11 @@ export interface Room {
   title: string;
   altTitle?: string;
   comment?: string;
+  condition?: {
+    isClean?: conditionType;
+    isUndamaged?: conditionType;
+    isWorking?: conditionType;
+  };
   items?: Item[];
 }
 
